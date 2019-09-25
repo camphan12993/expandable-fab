@@ -1,4 +1,4 @@
-# animation_testing
+# Flutter Expandable Floating Action Button
 
 A new Flutter project.
 
