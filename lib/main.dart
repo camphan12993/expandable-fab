@@ -1,8 +1,6 @@
 import 'package:animation_testing/float-button.dart';
 import 'package:flutter/material.dart';
 
-import 'menu.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

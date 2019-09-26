@@ -14,7 +14,6 @@ class _FloatButtonState extends State<FloatButton>
 
   AnimationController _moveController;
   Animation<double> _moveAnimation;
-  Animation<Color> _animateColor;
 
   @override
   void initState() {
@@ -26,24 +25,9 @@ class _FloatButtonState extends State<FloatButton>
         Tween<double>(begin: 0.0, end: 0.5 * pi).animate(_menuButtonController);
 
     _moveController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300))
-          ..addListener(() {
-            setState(() {});
-          });
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     _moveAnimation =
         Tween<double>(begin: 0.0, end: 1.0).animate(_moveController);
-
-    _animateColor = ColorTween(
-      begin: Colors.blue,
-      end: Colors.red,
-    ).animate(CurvedAnimation(
-      parent: _menuButtonController,
-      curve: Interval(
-        0.00,
-        1.00,
-        curve: Curves.easeOut,
-      ),
-    ));
   }
 
   @override
@@ -53,57 +37,56 @@ class _FloatButtonState extends State<FloatButton>
       children: <Widget>[
         AnimatedBuilder(
           animation: _moveAnimation,
-          child: Transform.scale(
-            scale: _moveAnimation.value,
-            child: FloatingActionButton(
-              backgroundColor: Colors.blueAccent,
-              onPressed: () => {},
-              child: Icon(Icons.school),
-            ),
+          child: FloatingActionButton(
+            backgroundColor: Colors.black45,
+            onPressed: () => {},
+            child: Icon(Icons.lock),
           ),
           builder: (BuildContext context, Widget child) {
-            return Transform.translate(
-                child: child, offset: Offset(-80 * _moveAnimation.value, 0));
+            return Transform(
+                alignment: FractionalOffset.center,
+                transform:
+                    Matrix4.translationValues(-80 * _moveAnimation.value, 0, 0)
+                      ..scale(_moveAnimation.value),
+                child: child);
           },
         ),
         AnimatedBuilder(
           animation: _moveAnimation,
-          child: Transform.scale(
-            scale: _moveAnimation.value,
-            child: FloatingActionButton(
-              backgroundColor: Colors.blueAccent,
-              onPressed: () => {},
-              child: Icon(Icons.school),
-            ),
+          child: FloatingActionButton(
+            backgroundColor: Colors.black45,
+            onPressed: () => {},
+            child: Icon(Icons.arrow_back_ios),
           ),
           builder: (BuildContext context, Widget child) {
-            return Transform.translate(
-                child: child,
-                offset: Offset(
-                    -40 * _moveAnimation.value, 60 * _moveAnimation.value));
+            return Transform(
+                alignment: FractionalOffset.center,
+                transform: Matrix4.translationValues(
+                    -40 * _moveAnimation.value, 60 * _moveAnimation.value, 0)
+                  ..scale(_moveAnimation.value),
+                child: child);
           },
         ),
         AnimatedBuilder(
           animation: _moveAnimation,
-          child: Transform.scale(
-            scale: _moveAnimation.value,
-            child: FloatingActionButton(
-              backgroundColor: Colors.blueAccent,
-              onPressed: () => {},
-              child: Icon(Icons.school),
-            ),
+          child: FloatingActionButton(
+            backgroundColor: Colors.black45,
+            onPressed: () => {},
+            child: Icon(Icons.delete),
           ),
           builder: (BuildContext context, Widget child) {
-            return Transform.translate(
-                child: child,
-                offset: Offset(
-                    -40 * _moveAnimation.value, -60 * _moveAnimation.value));
+            return Transform(
+                alignment: FractionalOffset.center,
+                transform: Matrix4.translationValues(
+                    -40 * _moveAnimation.value, -60 * _moveAnimation.value, 0)
+                  ..scale(_moveAnimation.value),
+                child: child);
           },
         ),
         AnimatedBuilder(
             animation: _rotateAnimation,
             child: FloatingActionButton(
-                backgroundColor: _animateColor.value,
+                backgroundColor: Colors.black45,
                 onPressed: () => {
                       if (_menuButtonController.isDismissed)
                         {
